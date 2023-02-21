@@ -1,5 +1,3 @@
-menuWindowState = 0;
-
 var ctrl_panel_slider = $("#control_panel_slider");
 ctrl_panel_slider.html("<i class='fa fa-angle-down' aria-hidden='true'></i>");
 var crtl_panel_status = 1;
@@ -135,7 +133,9 @@ function addThemes() {
             $(':root').css('--th-pri-cld', darkenColor(themes[themeIndex][1], 80));
             $(':root').css('--th-brd-clr', themes[themeIndex][2]);
             $('#bg').css('background-color', getComputedStyle(document.documentElement).getPropertyValue('--th-pri-cld'))
+            
             current_theme = themes[themeIndex];
+            activation_button_update();
             updateConnections();
         });
         
@@ -145,10 +145,23 @@ function addThemes() {
 }
 addThemes();
 
-$('#theme-content').click(() => { console.log(this); });
-
-
 $('.ml-name').click((e) => {
     let currentElement = e;
     currentElement.innerHTML = '<input type=\'text\' id=\'' + currentElement.id + 'text\' class=\'change-model-name\' placeholder=\'enter new name\' >';
 })
+
+function set_global_activation (id) {
+    if (global_activation != id)
+    {
+        $(global_activation).css("background-color", "transparent");
+        $(global_activation).css("color", "");
+        $(id).css("background-color", current_theme[2]);
+        $(id).css("color", current_theme[1]);
+        global_activation = id;
+    }
+}
+
+function activation_button_update () {
+    $(global_activation).css("background-color", current_theme[2]);
+    $(global_activation).css("color", current_theme[1]);
+}
