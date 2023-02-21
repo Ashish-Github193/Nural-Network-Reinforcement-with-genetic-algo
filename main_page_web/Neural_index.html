@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Neural-Network-Reinforcement</title>
+        <link rel="stylesheet" href="./Neural_style.css">
+
+        <script
+            src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+            integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    </head>
+    <body>
+        <canvas id="bg", width="1920px", height="1080px"></canvas>
+        <div id="main">
+
+            <div id="layerFirst" class="layer">
+                <div id="layerFirst_node1" class="node active_node
+                    disabled_node"></div>
+                <div id="layerFirst_node2" class="node active_node
+                    disabled_node"></div>
+                <div id="layerFirst_node3" class="node active_node
+                    disabled_node"></div>
+                <div id="layerFirst_node4" class="node active_node
+                    disabled_node"></div>
+                <div id="layerFirst_node5" class="node active_node
+                    disabled_node"></div>
+            </div>
+
+            <div id="layerLast" class="layer">
+                <div id="layerLast_node1" class="node active_node
+                    disabled_node"></div>
+                <div id="layerLast_node2" class="node active_node
+                    disabled_node"></div>
+            </div>
+
+        </div>
+
+        <div id="menu-button"><i class="fa fa-bars" aria-hidden="true"></i></div>
+        <div id="menu-window">
+            <div id="menu-left">
+                <div id="general" class="menu-left-items">General</div>
+                <div id="theme" class="menu-left-items">Themes</div>
+                <div id="settings" class="menu-left-items">Settings</div>
+            </div>
+            <div id="menu-right">
+                <div id="general-content">
+
+                    <!-- heading -->
+                    <div id="model-list0" class="general-content-model-heading">
+                        <div class="ml-info">
+                            <div class="ml-primary-info">
+                                <div id="sno0" class="ml-sno
+                                    content-model-class-text">Sno.</div>
+                                <div id="name0" class="ml-name
+                                    content-model-class-text">Model</div>
+                            </div>
+                            <div class="ml-secondary-info">
+                                <div id="nol0" class="ml-nol
+                                    content-model-class-text">n-layers</div>
+                                <div id="fitness0" class="ml-fit
+                                    content-model-class-text">fitness</div>
+                                <div id="generation0" class="ml-gen
+                                    content-model-class-text">gen</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="new" class="general-content-new-model">?? New+ ??</div>
+                </div>
+
+                <div class="theme-content" id="theme-content"> </div>
+                <div id="settings-content"></div>
+            </div>
+        </div>
+
+        <div id="control_panel">
+            <div id="control_panel_slider"><i class="fa fa-angle-up"
+                    aria-hidden="true"></i></div>
+            <div id="delete_index" class="buttons">
+                <div id="sub" onclick="update_value(-1)"><i class="fa
+                        fa-minus-circle" aria-hidden="true"></i></div>
+                <div id="num">0</div>
+                <div id="add" onclick="update_value(1)"><i class="fa
+                        fa-plus-circle" aria-hidden="true"></i></div>
+            </div>
+            <div id="add_layer" class="buttons" onclick="Add_layer()">Add layer</div>
+            <div id="move_left" class="buttons" onclick="Swap_layer(-1);">Move
+                left</div>
+            <div id="move_right" class="buttons" onclick="Swap_layer(1);">Move
+                right</div>
+            <div id="proceed" class="buttons" onclick="Proceed()">Proceed -></div>
+            <div id="delete_layer" class="buttons" onclick="delete_layer()">Delete
+                layer</div>
+            <div id="edit" class="buttons">Edit-Mode:&nbsp<b>ON</b></div>
+            <div id="relu" class="buttons">ReLU</div>
+            <div id="tanh" class="buttons">Tanh</div>
+            <div id="sigmoid" class="buttons">Sigmoid</div>
+        </div>
+    </body>
+    <script src="../main_page_js/Neural_utils.js"></script>
+    <script src="../main_page_js/Neural_main.js"></script>
+    <script src="../main_page_js/Neural_main_menu.js"></script>
+</html>
