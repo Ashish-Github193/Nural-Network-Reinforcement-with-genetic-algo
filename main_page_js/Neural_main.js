@@ -77,11 +77,17 @@ function updateRectangle(event) {
 }
 
 function trunNodeOn(x, y, width, height) {
-    const endX = x + width;
-    const endY = y + height;
+    endX = x + width;
+    endY = y + height;
 
-    if (endX < x) { x = endX; width *= -1; }
-    if (endY < y) { y = endY; height *= -1; }
+    if (endX < x && endY < y) {
+        x = endX;
+        y = endY;
+        height *= -1;
+        width *= -1;
+        endX = x + width;
+        endY = y + height;
+    }
 
     for (let i = 1; i <= NumberOfLayers; i++) {
         const layer = document.getElementById("layer" + i);
