@@ -1,13 +1,9 @@
-// ---------------------------------------------- Global Variables --------------------------//
-NumberOfLayers = document.getElementById("main").children.length - 2;
-Activations = [];
-
-var nodes = $(".node");
-nodes.click(function () {
-    if ($(this).parent().attr("id") != "layerFirst" && $(this).parent().attr("id") != "layerLast") {
-        $(this).toggleClass("inactive_node active_node");
-    }
-})
+// var nodes = $(".node");
+// nodes.click(function () {
+//     if ($(this).parent().attr("id") != "layerFirst" && $(this).parent().attr("id") != "layerLast") {
+//         $(this).toggleClass("inactive_node active_node");
+//     }
+// })
 
 function update_value(inc) {
     const num = parseInt($("#num").text()) + inc;
@@ -31,7 +27,7 @@ let rectangle = null;
 
 $(document).on("mousedown", (event) => {
     // Check if the right mouse button was pressed
-    if (event.which === 1) {
+    if (event.which === 1 && menuWindowState == 0) {
         // Get the mouse coordinates
         const mouseX = event.clientX;
         const mouseY = event.clientY;
@@ -80,12 +76,14 @@ function trunNodeOn(x, y, width, height) {
     endX = x + width;
     endY = y + height;
 
-    if (endX < x && endY < y) {
+    if (endX < x) {
         x = endX;
-        y = endY;
-        height *= -1;
         width *= -1;
         endX = x + width;
+    }
+    if (endY < y) {
+        y = endY;
+        height *= -1;
         endY = y + height;
     }
 
@@ -98,8 +96,12 @@ function trunNodeOn(x, y, width, height) {
             const childEndX = childRect.left + child.offsetWidth;
             const childEndY = childRect.top + child.offsetHeight;
 
-            if (childEndX > x && childEndX < endX && childEndY > y && childEndY < endY)
+            if ((childEndX > x && childEndX < endX) && (childEndY > y && childEndY < endY) && (edit_status%2 == 0))
+            {
                 $(child).toggleClass("inactive_node active_node");
+                if ($(child).hasClass("inactive_node")) {$(child).css("background-color", "#a9a9a9");}
+                else {$(child).css("background-color", current_theme[2]);}
+            }
         }
     }
 }
@@ -139,30 +141,16 @@ function Add_layer() {
         })
         layer.append(node);
     }
+    if ($("#num-6").text() == 0) { Activations.push("None"); }
+    else { Activations.push(global_activation); }
     document.getElementById("main").insertBefore(layer, document.getElementById("layerLast"));
 }
 
-$(window).resize(function () { updateConnections(); });
-
-const edit = $("#edit");
-var edit_status = 0;
-edit.click(function () {
-    edit_status++;
-    if (edit_status % 2 == 0) {
-        edit.html("Edit-Mode:&nbsp<b>ON</b>");
-        $(".node.inactive_node").removeClass("disabled_node");
-        $(".inactive_node").css("background-color", "#ffb803");
-    }
-    else {
-        edit.html("Edit-Mode:&nbsp<b>OFF</b>");
-        $(".node").addClass("disabled_node");
-        $(".inactive_node").css("background-color", "transparent");
-    }
-})
 
 function delete_layer() {
     layerName = "layer" + parseInt($("#num").text());
     $("#" + layerName).remove();
+    Activations.splice(parseInt($("#num").text()), 1);
 
     index_layer = 1;
     for (layer of document.getElementById("main").children) {
@@ -180,6 +168,25 @@ function delete_layer() {
     update_value(-1);
     NumberOfLayers = document.getElementById("main").children.length - 2;
 }
+
+
+$(window).resize(function () { updateConnections(); });
+
+var edit_status = 0;
+function edit_on_off(id) {
+    edit_status++;
+    if (edit_status % 2 == 0) {
+        $(id).html("Edit-Mode:&nbsp<b>ON</b>");
+        $(".node.inactive_node").removeClass("disabled_node");
+        $(".inactive_node").css("background-color", "#a9a9a9");
+    }
+    else {
+        $(id).html("Edit-Mode:&nbsp<b>OFF</b>");
+        $(".node").addClass("disabled_node");
+        $(".inactive_node").css("background-color", "transparent");
+    }
+}
+
 
 function Swap_layer(inc) {
     if (inc == -1) { var min = 1; var max = NumberOfLayers; }
@@ -268,6 +275,5 @@ function Proceed() {
     model_list_item.append(ml_info);
     model_list_item.append(ml_operations);
 
-    // $("#general-content").append(model_list_item);
     $(model_list_item).insertBefore("div.general-content-new-model");
 }
