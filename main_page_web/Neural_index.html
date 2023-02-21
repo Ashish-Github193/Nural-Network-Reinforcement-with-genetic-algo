@@ -77,14 +77,70 @@
 
                 <div class="theme-content" id="theme-content"> </div>
                 <div id="settings-content">
-                    <div class="option-name">Number of generation</div>
-                    <div class="option-name">Population size</div>
-                    <div class="option-name">Crossove rate</div>
-                    <div class="option-name">Mutation rate</div>
-                    <div class="option-name">Number of elite networks</div>
-                    <div class="option-name">Early stopping</div>
-                    <div class="option-name">Same activation for every layer</div>
-                    <div class="option-name">Add custom track</div>
+                    <div class="option">
+                        <span class="option-name">Population size</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-1" onclick="button_function('sub-1')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-1">50</div>
+                            <div id="add-1" onclick="button_function('add-1')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">Crossove rate (%)</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-2" onclick="button_function('sub-2')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-2">50</div>
+                            <div id="add-2" onclick="button_function('add-2')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">Mutation rate (%)</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-3" onclick="button_function('sub-3')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-3">20</div>
+                            <div id="add-3" onclick="button_function('add-3')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">Number of elite networks</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-4" onclick="button_function('sub-4')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-4">10</div>
+                            <div id="add-4" onclick="button_function('add-4')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">Early stopping</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-5" onclick="button_function('sub-5')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-5">0</div>
+                            <div id="add-5" onclick="button_function('add-5')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">Same activation for every layer</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-6" onclick="button_function('sub-6')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-6">1</div>
+                            <div id="add-6" onclick="button_function('add-6')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSet gloabl activation</span>
+                        <div class="select-activation">
+                            <div id="relu_" class="buttons" onclick="set_global_activation('#relu_')">ReLU</div>
+                            <div id="tanh_" class="buttons" onclick="set_global_activation('#tanh_')">Tanh</div>
+                            <div id="sigmoid_" class="buttons" onclick="set_global_activation('#sigmoid_')">Sigmoid</div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <span class="option-name">Add custom track</span>
+                        <div id="simulation-settings" class="buttons">
+                            <div id="sub-7" onclick="button_function('sub-7')"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+                            <div id="num-7">0</div>
+                            <div id="add-7" onclick="button_function('add-7')"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,7 +163,7 @@
             <div id="proceed" class="buttons" onclick="Proceed()">Proceed -></div>
             <div id="delete_layer" class="buttons" onclick="delete_layer()">Delete
                 layer</div>
-            <div id="edit" class="buttons">Edit-Mode:&nbsp<b>ON</b></div>
+            <div id="edit" class="buttons" onclick="edit_on_off('#edit')">Edit-Mode:&nbsp<b>ON</b></div>
             <div id="relu" class="buttons">ReLU</div>
             <div id="tanh" class="buttons">Tanh</div>
             <div id="sigmoid" class="buttons">Sigmoid</div>
