@@ -1,5 +1,15 @@
-$(":root").css("--th-pri-cld", darkenColor(getComputedStyle(document.documentElement).getPropertyValue('--th-pri-clr'), 80));
+// ---------------------------------------------- Global Variables --------------------------//
+Activations = [];
+global_activation = "#relu_";
+menuWindowState = 0;
+NumberOfLayers = document.getElementById("main").children.length - 2;
 current_theme = ['#001824', '#012536', '#ffb703'];
+
+
+$(global_activation).css("background-color", current_theme[2]);
+$(global_activation).css("color", current_theme[1]);
+
+$(":root").css("--th-pri-cld", darkenColor(getComputedStyle(document.documentElement).getPropertyValue('--th-pri-clr'), 80));
 
 function drawLine ([x1, y1], [x2, y2], color, thickness) {
     const canvas = document.getElementById("bg");
@@ -56,19 +66,55 @@ function darkenColor(hex, percent) {
     return darkenedHex;
 }
 
-function lightenColor(color, amount) {
-    // Parse the color string into its RGB components
-    const rgb = color.match(/\d+/g);
-  
-    // Calculate the new RGB values based on the amount parameter
-    const r = Math.min(parseInt(rgb[0], 10) + amount, 255);
-    const g = Math.min(parseInt(rgb[1], 10) + amount, 255);
-    const b = Math.min(parseInt(rgb[2], 10) + amount, 255);
-  
-    // Combine the new RGB values into a new color string
-    const newColor = `rgb(${r},${g},${b})`;
-  
-    // Return the new color string
-    return newColor;
-  }
+function button_function(id) {
+
+    switch (parseInt(id.slice(-1)))
+    {
+        case 1:
+            var inc = 10;
+            var range = [2, 1000];
+            break;
+        case 2:
+            var inc = 2;
+            var range = [0, 100];
+            break;
+        case 3:
+            var inc = 2;
+            var range = [0, 100];
+            break;
+        case 4:
+            var inc = 1;
+            var range = [0, 1000];
+            break;
+        case 5:
+            var inc = 1;
+            var range = [0, 1];
+            break;
+        case 6:
+            var inc = 1;
+            var range = [0, 1];
+            break;
+        case 7:
+            var inc = 1;
+            var range = [0, 1];
+            break;
+        default:
+            return null;
+
+    }
+
+    const current_value = parseInt($("#num-"+id.slice(-1)).text());
+    if (id.slice(0, -2) == "add")
+    {
+        if (current_value < range[1]) {$("#num-"+id.slice(-1)).text((current_value+inc));}
+    }
+
+    else if (id.slice(0, -2) == "sub")
+    {
+        if (current_value > range[0]) {$("#num-"+id.slice(-1)).text((current_value-inc));}
+    }
+
+
+    
+}
   
